@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ultra Pro Video Maker Studio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Background Video -->
+  <video id="bgVideo" class="bg-video" autoplay muted loop playsinline></video>
+
+  <!-- Background Image -->
+  <div id="bgImage" class="bg-image"></div>
+
+  <!-- Overlay -->
+  <div class="overlay"></div>
+
+  <!-- Main -->
+  <div class="app">
+
+    <!-- Sidebar Panel -->
+    <aside class="panel" id="panel">
+      <div class="panel-header">
+        <h1>🎬 Ultra Studio</h1>
+        <p>Video Maker Template</p>
+      </div>
+
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="tab-video">🎥 فيديو</button>
+        <button class="tab-btn" data-tab="tab-audio">🎵 صوت</button>
+        <button class="tab-btn" data-tab="tab-style">🎨 شكل</button>
+        <button class="tab-btn" data-tab="tab-preset">💾 Preset</button>
+      </div>
+
+      <!-- TAB: VIDEO -->
+      <div class="tab active" id="tab-video">
+
+        <div class="card">
+          <h3>🎥 التسجيل</h3>
+
+          <label>مدة الفيديو (ثانية)</label>
+          <input type="number" id="duration" value="15" min="5" max="300">
+
+          <label>تأخير البداية (ثانية)</label>
+          <input type="number" id="delay" value="3" min="0" max="20">
+
+          <label>الفاصل بين الإشعارات (ms)</label>
+          <input type="number" id="interval" value="1500" min="500" max="15000">
+
+          <button class="btn record" id="startBtn">🎥 بدء التسجيل</button>
+          <button class="btn" id="previewBtn">👁 Preview</button>
+          <button class="btn danger" id="stopBtn">⛔ إيقاف</button>
+
+          <small class="hint">ابدأ تسجيل الشاشة عند اختفاء اللوحة.</small>
+        </div>
+
+        <div class="card">
+          <h3>🖼️ الخلفية</h3>
+
+          <label class="file">
+            📷 اختر صورة خلفية
+            <input type="file" id="imageInput" accept="image/*">
+          </label>
+
+          <label class="file">
+            📽️ اختر فيديو خلفية
+            <input type="file" id="videoInput" accept="video/*">
+          </label>
+
+          <button class="btn danger" id="removeVideo">إيقاف الفيديو</button>
+        </div>
+
+      </div>
+
+      <!-- TAB: AUDIO -->
+      <div class="tab" id="tab-audio">
+
+        <div class="card">
+          <h3>🔊 تفعيل الصوت</h3>
+          <button class="btn success" id="enableAudio">🔊 Enable Audio</button>
+          <small class="hint">ضروري لتفعيل الصوت في المتصفح.</small>
+        </div>
+
+        <div class="card">
+          <h3>🔔 صوت الإشعارات</h3>
+
+          <label class="file">
+            🔔 رفع صوت إشعار
+            <input type="file" id="notifSoundInput" accept="audio/*">
+          </label>
+
+          <label>مستوى صوت الإشعار</label>
+          <input type="range" id="notifVol" min="0" max="100" value="70">
+
+          <button class="btn" id="testNotif">🔔 Test Notification</button>
+        </div>
+
+        <div class="card">
+          <h3>🎶 موسيقى هادئة</h3>
+
+          <label class="file">
+            🎶 رفع موسيقى خلفية
+            <input type="file" id="musicInput" accept="audio/*">
+          </label>
+
+          <label>مستوى صوت الموسيقى</label>
+          <input type="range" id="musicVol" min="0" max="100" value="35">
+
+          <button class="btn" id="toggleMusic">🎵 تشغيل / إيقاف</button>
+        </div>
+
+      </div>
+
+      <!-- TAB: STYLE -->
+      <div class="tab" id="tab-style">
+
+        <div class="card">
+          <h3>🌗 الوضع</h3>
+          <button class="btn" id="themeBtn">🌗 Light / Dark</button>
+          <small class="hint" id="themeLabel">Dark Mode</small>
+        </div>
+
+        <div class="card">
+          <h3>🎨 تأثيرات الخلفية</h3>
+
+          <label>Brightness</label>
+          <input type="range" id="brightness" min="50" max="160" value="100">
+
+          <label>Contrast</label>
+          <input type="range" id="contrast" min="50" max="160" value="100">
+
+          <label>Saturation</label>
+          <input type="range" id="saturation" min="0" max="220" value="100">
+        </div>
+
+        <div class="card">
+          <h3>✨ خيارات الإشعارات</h3>
+
+          <label>أقصى عدد إشعارات على الشاشة</label>
+          <input type="number" id="maxNotifs" value="5" min="1" max="20">
+
+          <label>مدة بقاء الإشعار (ms)</label>
+          <input type="number" id="notifLife" value="6500" min="1000" max="20000">
+        </div>
+
+      </div>
+
+      <!-- TAB: PRESET -->
+      <div class="tab" id="tab-preset">
+
+        <div class="card">
+          <h3>💾 حفظ وتحميل Preset</h3>
+
+          <button class="btn" id="savePreset">💾 حفظ Preset</button>
+          <button class="btn" id="loadPreset">📂 تحميل Preset</button>
+          <input type="file" id="presetFile" accept=".json" hidden>
+
+          <small class="hint">Preset يحفظ الإعدادات فقط، الملفات (صوت/فيديو) لا تُحفظ.</small>
+        </div>
+
+        <div class="card">
+          <h3>📌 نصيحة</h3>
+          <small class="hint">
+            بعد الضغط على 🎥 بدء التسجيل:<br>
+            1) يظهر عد تنازلي<br>
+            2) تختفي اللوحة<br>
+            3) تبدأ الإشعارات تلقائياً<br>
+            4) بعد انتهاء الوقت تعود اللوحة
+          </small>
+        </div>
+
+      </div>
+
+      <div class="footer">
+        <small>Ultra Studio • GitHub Pages</small>
+      </div>
+
+    </aside>
+
+    <!-- Preview -->
+    <main class="preview">
+
+      <div class="phone">
+
+        <div class="top-info">
+          <div class="time" id="clock">12:05</div>
+          <div class="date" id="date">الأربعاء • 13 مايو</div>
+        </div>
+
+        <div class="notifs" id="notifs"></div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Countdown Overlay -->
+  <div class="countdown hidden" id="countdown">
+    <div class="num" id="countNum">3</div>
+    <div class="text">استعد للتسجيل...</div>
+  </div>
+
+  <!-- Audio -->
+  <audio id="notifSound"></audio>
+  <audio id="music" loop></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
